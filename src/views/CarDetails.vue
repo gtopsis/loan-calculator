@@ -1,18 +1,18 @@
 <template>
   <div class="home container-fluid">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+    <img alt="Vue logo" src="../assets/spotawheel-logo.png" />
+    <LoanCalcModal isShow />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import LoanCalcModal from "@/components/LoanCalcModal.vue";
 
 export default {
   name: "Home",
   components: {
-    // HelloWorld,
+    LoanCalcModal,
   },
 };
 </script>
