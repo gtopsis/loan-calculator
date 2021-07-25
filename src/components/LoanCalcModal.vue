@@ -41,6 +41,7 @@
                   :label="sliderA.label"
                   :step="sliderA.step"
                   :initValue="sliderA.initValue"
+                  @change="updateValueA"
                   :measurementUnit="sliderA.measurementUnit"
                 ></custom-range>
               </div>
@@ -51,6 +52,7 @@
                   :label="sliderB.label"
                   :step="sliderB.step"
                   :initValue="sliderB.initValue"
+                  @change="updateValueB"
                   :measurementUnit="sliderB.measurementUnit"
                 ></custom-range>
               </div>
@@ -59,14 +61,46 @@
             <div class="row justify-content-center">
               <div class="col-auto">
                 <strong>
-                  Μηνιαία Δόση: <span>{{ total }}€</span>
+                  <span>
+                    {{ monthlyInstallmentLabel }}
+                  </span>
+                  <span>{{ monthlyInstallment }}€</span>
                 </strong>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Understood</button>
+          <div class="row">
+            <div class="col-6">
+              <label for=""></label>
+            </div>
+            <div class="col-6">
+              <form action="" method="post">
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="input-group">
+                      <span class="input-group-text" id="inputGroupPrepend2"
+                        >@</span
+                      >
+                      <input
+                        type="telephone"
+                        class="form-control"
+                        id="validationDefaultUsername"
+                        aria-describedby="inputGroupPrepend2"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-auto">
+                    <button type="button" class="btn btn-primary">
+                      Understood
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -89,9 +123,10 @@ export default {
     return {
       modalTitle: "Υπολογισμός Δόσης",
       modalSubtitle: "Επίλεξε την προκαταβολή και την διαρκεια που σε συμφέρει",
+      monthlyInstallmentLabel: "Μηνιαία Δόση:",
       dialog: null,
-      finalPrice: 2000,
-      downsidePayment: 200,
+      finalPrice: 20000,
+      downPayment: 200,
       duration: 12,
       sliderA: {
         min: 0,
@@ -112,11 +147,18 @@ export default {
     };
   },
   computed: {
-    total() {
-      return (this.finalPrice - this.downsidePayment) / this.duration;
+    monthlyInstallment() {
+      let final = (this.finalPrice - this.downPayment) / this.duration;
+      return Math.ceil(final);
     },
   },
   methods: {
+    updateValueA(v) {
+      this.downPayment = v;
+    },
+    updateValueB(v) {
+      this.duration = v;
+    },
     showModal() {
       this.dialog.show();
     },
