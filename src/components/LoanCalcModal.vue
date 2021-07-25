@@ -59,7 +59,9 @@
             </div>
 
             <div class="row justify-content-center">
-              <div class="col-auto">
+              <div
+                class="col-lg-auto px-0 col-sm-12 text-sm-left text-lg-center"
+              >
                 <strong>
                   <span>
                     {{ monthlyInstallmentLabel }}
@@ -70,33 +72,54 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer p-4">
           <div class="row">
-            <div class="col-6">
-              <label for=""></label>
+            <div class="col-12 col-md-6">
+              <label for="" class="text-white text-md-left text-sm-center">
+                <p class="mb-1">
+                  {{ telephoneInput.label.sentence1 }}
+                </p>
+                <p class="mb-sm-2 mb-md-0">
+                  {{ telephoneInput.label.sentence2 }}
+                </p>
+              </label>
             </div>
-            <div class="col-6">
-              <form action="" method="post">
-                <div class="row">
-                  <div class="col-auto">
-                    <div class="input-group">
-                      <span class="input-group-text" id="inputGroupPrepend2"
-                        >@</span
-                      >
-                      <input
-                        type="telephone"
-                        class="form-control"
-                        id="validationDefaultUsername"
-                        aria-describedby="inputGroupPrepend2"
-                        required
-                      />
-                    </div>
+            <div class="col-12 col-md-6">
+              <form class="needs-validation" @submit="checkForm">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"
+                    >&#128222;</span
+                  >
+
+                  <input
+                    type="telephone"
+                    class="form-control"
+                    :placeholder="telephoneInput.placeholder"
+                    v-model="telephoneInput.value"
+                    aria-label="Client's telephone"
+                    aria-describedby="basic-addon2"
+                    maxlength="10"
+                  />
+
+                  <div class="input-group-append">
+                    <input
+                      class="btn bg-success text-white"
+                      type="submit"
+                      :value="formattedSubmitBtnText"
+                    />
                   </div>
-                  <div class="col-md-auto">
-                    <button type="button" class="btn btn-primary">
-                      Understood
-                    </button>
-                  </div>
+                </div>
+                <div v-if="errors.length">
+                  <ul class="mb-0">
+                    <li v-for="(error, index) in errors" :key="index">
+                      <span class="error-msg">{{ error }}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div v-if="isFormValid">
+                  <span class="success-msg">
+                    {{ successMsg }}
+                  </span>
                 </div>
               </form>
             </div>
@@ -144,12 +167,28 @@ export default {
         label: "Δόση",
         measurementUnit: " μήνες",
       },
+      telephoneInput: {
+        label: {
+          sentence1: "Συμπλήρωσε εδώ το τηλέφωνό σου.",
+          sentence2: "Θα σε καλέσουμε άμεσα.",
+        },
+        placeholder: "Αριθμός τηλεφώνου...",
+        icon: "",
+        value: null,
+      },
+      submitBtnText: "ΚΑΛΕΣΤΕ ΜΕ",
+      errors: [],
+      isFormValid: false,
+      successMsg: "Ευχαριστούμε. Θα σας καλέσουμε άμεσα.",
     };
   },
   computed: {
     monthlyInstallment() {
       let final = (this.finalPrice - this.downPayment) / this.duration;
       return Math.ceil(final);
+    },
+    formattedSubmitBtnText() {
+      return this.submitBtnText.toUpperCase();
     },
   },
   methods: {
@@ -161,6 +200,24 @@ export default {
     },
     showModal() {
       this.dialog.show();
+    },
+    checkForm(e) {
+      this.errors = [];
+      this.isFormValid = false;
+
+      // check userTelephone
+      let telephone = this.telephoneInput.value;
+      let regex = /^\d{10}$/;
+
+      if (!telephone) {
+        this.errors.push("Το πεδίο είναι υποχρεωτικό");
+      } else if (!regex.test(telephone)) {
+        this.errors.push("Το τηλέφωνο πρέπει να αποτελείται από 10 ψηφία");
+      } else {
+        this.isFormValid = true;
+      }
+
+      e.preventDefault();
     },
   },
   mounted() {
@@ -191,5 +248,12 @@ export default {
 
 .modal-subtitle {
   font-size: 0.8rem;
+}
+
+.error-msg {
+  color: #08b3dc;
+}
+.success-msg {
+  color: yellowgreen;
 }
 </style>
