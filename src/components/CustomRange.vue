@@ -1,39 +1,49 @@
 <template>
   <!-- Range -->
-  <div class="container-fluid px-0">
-    <div class="row justify-content-between">
-      <div class="col-auto ps-0">
+  <div class="range-container container-fluid px-0">
+    <header class="row justify-content-between">
+      <div class="col-auto ps-0 mb-2">
         <strong>
-          <label for="disabledRange" class="form-label mb-0">{{ label }}</label>
+          <label for="range" class="range-container__label mb-0">{{
+            label
+          }}</label>
         </strong>
       </div>
       <div class="col-auto pe-0 text-right">
-        <h4 class="mb-0">{{ formattedCurrValue }}{{ measurementUnit }}</h4>
+        <strong class="range-container__value mb-0">
+          <span class="range-value__primary"> {{ formattedCurrValue }} </span>
+          <span class="range-value__secondary">
+            {{ measurementUnit }}
+          </span>
+        </strong>
       </div>
-    </div>
-    <div class="row">
+    </header>
+
+    <main class="row mb-2">
       <input
         type="range"
-        class="form-range"
+        class="range-container__slider"
+        id="range"
         v-model="currValue"
         :min="min"
         :max="max"
         :step="step"
         @change="emitValue"
       />
-    </div>
-    <div class="row justify-content-between">
+    </main>
+
+    <footer class="row justify-content-between">
       <div class="col-auto ps-0">
-        <span class="secondary text-left"
+        <span class="range-container__min-value text-left"
           >{{ formattedMinValue }}{{ measurementUnit }}</span
         >
       </div>
       <div class="col-auto pe-0">
-        <span class="secondary text-right"
+        <span class="range-container__max-value text-right"
           >{{ formattedMaxValue }}{{ measurementUnit }}</span
         >
       </div>
-    </div>
+    </footer>
   </div>
 </template>
 
@@ -92,5 +102,28 @@ export default {
 }
 .form-label {
   vertical-align: middle;
+}
+
+.range-container__label {
+  font-size: 0.9rem;
+}
+.range-container__value {
+  font-weight: bold;
+}
+.range-container__value .range-value__primary {
+  font-size: 1.25rem;
+}
+
+.range-container__value .range-value__secondary {
+  font-size: 1rem;
+}
+.range-container__min-value,
+.range-container__max-value {
+  font-size: 0.7rem;
+  color: grey;
+}
+
+.slider:hover {
+  cursor: pointer;
 }
 </style>

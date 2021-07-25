@@ -1,16 +1,11 @@
 <template>
   <!-- Modal -->
-  <div
-    ref="modalRef"
-    class="modal fade"
-    tabindex="-1"
-    aria-labelledby="staticBackdropLabel"
-    aria-hidden="true"
-  >
+  <div ref="modalRef" class="modal fade" tabindex="-1" aria-hidden="true">
     <div
-      class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-dialog-scrollable"
+      class="loanCalcModal modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-dialog-scrollable"
     >
       <div class="modal-content">
+        <!-- modal header -->
         <div class="modal-header">
           <button
             type="button"
@@ -19,9 +14,12 @@
             aria-label="Close"
           ></button>
         </div>
+
+        <!-- modal body -->
         <div class="modal-body">
           <div class="container-fluid mb-4 px-2 px-md-5">
-            <div class="row">
+            <!-- header -->
+            <header class="row mb-3">
               <div class="col-12">
                 <h5 class="modal-title text-center">
                   {{ modalTitle }}
@@ -30,10 +28,10 @@
               <div class="modal-subtitle col-12">
                 <p class="text-center">{{ modalSubtitle }}</p>
               </div>
-            </div>
+            </header>
 
-            <!-- sliders -->
-            <div class="row mb-4">
+            <!-- sliders/ranges -->
+            <main class="row mb-3">
               <div class="col-12 mb-4">
                 <custom-range
                   :min="sliderA.min"
@@ -56,34 +54,46 @@
                   :measurementUnit="sliderB.measurementUnit"
                 ></custom-range>
               </div>
-            </div>
+            </main>
 
-            <div class="row justify-content-center">
+            <!-- monthly installment -->
+            <footer
+              class="loanCalc__monthly-installment row justify-content-center"
+            >
               <div
-                class="col-lg-auto px-0 col-sm-12 text-sm-left text-lg-center"
+                class="col-lg-auto px-0 col-sm-12 text-sm-start text-lg-center"
               >
                 <strong>
-                  <span>
+                  <span class="monthly-installment__secondary">
                     {{ monthlyInstallmentLabel }}
                   </span>
-                  <span>{{ monthlyInstallment }}€</span>
+                  <span class="monthly-installment__primary"
+                    >{{ monthlyInstallment }}€</span
+                  >
                 </strong>
               </div>
-            </div>
+            </footer>
           </div>
         </div>
+
+        <!-- modal footer -->
         <div class="modal-footer p-4">
           <div class="row">
             <div class="col-12 col-md-6">
-              <label for="" class="text-white text-md-left text-sm-center">
+              <label
+                for="telephone"
+                class="text-white text-md-start text-sm-center"
+              >
                 <p class="mb-1">
-                  {{ telephoneInput.label.sentence1 }}
+                  <strong>{{ telephoneInput.label.sentence1 }}</strong>
                 </p>
                 <p class="mb-sm-2 mb-md-0">
-                  {{ telephoneInput.label.sentence2 }}
+                  <strong>{{ telephoneInput.label.sentence2 }}</strong>
                 </p>
               </label>
             </div>
+
+            <!-- form -->
             <div class="col-12 col-md-6">
               <form class="needs-validation" @submit="checkForm">
                 <div class="input-group mb-3">
@@ -93,29 +103,33 @@
 
                   <input
                     type="telephone"
+                    id="telephone"
                     class="form-control"
                     :placeholder="telephoneInput.placeholder"
                     v-model="telephoneInput.value"
                     aria-label="Client's telephone"
-                    aria-describedby="basic-addon2"
                     maxlength="10"
                   />
 
                   <div class="input-group-append">
                     <input
-                      class="btn bg-success text-white"
+                      class="btn submit-btn text-white"
                       type="submit"
                       :value="formattedSubmitBtnText"
                     />
                   </div>
                 </div>
+
+                <!-- error messages -->
                 <div v-if="errors.length">
-                  <ul class="mb-0">
+                  <ul class="mb-0 p-0 text-start">
                     <li v-for="(error, index) in errors" :key="index">
-                      <span class="error-msg">{{ error }}</span>
+                      <span class="error-msg ">{{ error }}</span>
                     </li>
                   </ul>
                 </div>
+
+                <!-- success message -->
                 <div v-if="isFormValid">
                   <span class="success-msg">
                     {{ successMsg }}
@@ -164,7 +178,7 @@ export default {
         max: 72,
         step: 1,
         initValue: 72,
-        label: "Δόση",
+        label: "Διάρκεια",
         measurementUnit: " μήνες",
       },
       telephoneInput: {
@@ -236,24 +250,40 @@ export default {
 .modal-footer {
   border: none;
 }
-
 .modal-footer {
   background-color: #223657;
 }
-
 .modal-title {
   font-weight: bold;
   font-size: 1.2rem;
 }
-
 .modal-subtitle {
   font-size: 0.8rem;
 }
 
+/* sliders */
+.input-group-text {
+  background-color: #fff;
+  color: #555;
+}
+.input-group-text + input {
+  border-left: none;
+}
+
+/* monthly installment */
+.monthly-installment__primary {
+  font-size: 1.5rem;
+}
+.monthly-installment__secondry {
+  font-size: 0.6rem;
+}
 .error-msg {
   color: #08b3dc;
 }
 .success-msg {
   color: yellowgreen;
+}
+.submit-btn {
+  background-color: #55ac36;
 }
 </style>
