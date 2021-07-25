@@ -19,9 +19,9 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="modal-body px-sm-2 px-md-5">
-          <div class="container-fluid">
-            <div class="row mb-4">
+        <div class="modal-body">
+          <div class="container-fluid mb-4 px-2 px-md-5">
+            <div class="row">
               <div class="col-12">
                 <h5 class="modal-title text-center">
                   {{ modalTitle }}
