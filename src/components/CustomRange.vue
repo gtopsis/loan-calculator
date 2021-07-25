@@ -8,7 +8,7 @@
         </strong>
       </div>
       <div class="col-auto pe-0 text-right">
-        <h4 class="mb-0">{{ currValue }}{{ measurementUnit }}</h4>
+        <h4 class="mb-0">{{ formattedCurrValue }}{{ measurementUnit }}</h4>
       </div>
     </div>
     <div class="row">
@@ -19,14 +19,19 @@
         :min="min"
         :max="max"
         :step="step"
+        @change="emitValue"
       />
     </div>
     <div class="row justify-content-between">
       <div class="col-auto ps-0">
-        <span class="secondary text-left">{{ min }}{{ measurementUnit }}</span>
+        <span class="secondary text-left"
+          >{{ formattedMinValue }}{{ measurementUnit }}</span
+        >
       </div>
       <div class="col-auto pe-0">
-        <span class="secondary text-right">{{ max }}{{ measurementUnit }}</span>
+        <span class="secondary text-right"
+          >{{ formattedMaxValue }}{{ measurementUnit }}</span
+        >
       </div>
     </div>
   </div>
@@ -48,8 +53,31 @@ export default {
       currValue: 0,
     };
   },
-  computed: {},
-  methods: {},
+  computed: {
+    formattedCurrValue() {
+      let num = this.currValue;
+      return this.formatNummericValue(num);
+    },
+    formattedMinValue() {
+      let num = this.min;
+      return this.formatNummericValue(num);
+    },
+    formattedMaxValue() {
+      let num = this.max;
+      return this.formatNummericValue(num);
+    },
+  },
+  methods: {
+    formatNummericValue(num) {
+      const seperator = ".";
+      return num
+        .toString()
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, `$1${seperator}`);
+    },
+    emitValue(event) {
+      this.$emit("change", event.target.value);
+    },
+  },
   mounted() {
     this.currValue = this.initValue;
   },
