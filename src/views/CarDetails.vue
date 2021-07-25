@@ -1,6 +1,6 @@
 <template>
   <div class="home container-fluid">
-    <img alt="Vue logo" src="../assets/spotawheel-logo.png" />
+    <img width="100%" alt="Vue logo" src="../assets/spotawheel-logo.png" />
     <LoanCalcModal isShow />
   </div>
 </template>

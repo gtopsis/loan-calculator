@@ -8,7 +8,7 @@
     aria-hidden="true"
   >
     <div
-      class="modal-dialog  modal-lg modal-dialog-centered modal-dialog-scrollable"
+      class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-dialog-scrollable"
     >
       <div class="modal-content">
         <div class="modal-header">
@@ -178,6 +178,10 @@ export default {
 .modal-header,
 .modal-footer {
   border: none;
+}
+
+.modal-footer {
+  background-color: #223657;
 }
 
 .modal-title {
