@@ -11,6 +11,7 @@ A simple loan calculator based on final price of a car, desired down payment and
 
 - Vue.js v2.6.11 (with vue-router v3.2)
 - Bootstrap 5.0.2
+
 ## Project setup
 ```
 npm install
@@ -30,6 +31,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
