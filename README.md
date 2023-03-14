@@ -5,7 +5,7 @@
 
 ## Description
 
-A simple loan calculator based on final price of a car, desired down payment and the duration of loan repayment.
+A simple calculator of the monthly payment for a loan. The formula is `monthly payment = loan amount / duration of repayment`.
 
 ## Frameworks used
 
