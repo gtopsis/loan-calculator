@@ -1,6 +1,6 @@
 # Simple loan calculator
 
-![Screenshot of loan calculator](./images/loan-calc.png?raw=true "Screenshot of loan calculator")
+![Screenshot of loan calculator](./screenshots/loan-calc.png?raw=true "Screenshot of loan calculator")
 
 
 ## Description
