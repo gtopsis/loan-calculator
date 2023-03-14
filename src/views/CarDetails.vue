@@ -1,6 +1,5 @@
 <template>
   <div class="home container-fluid">
-    <img width="100%" alt="Vue logo" src="../assets/spotawheel-logo.png" />
     <LoanCalcModal isShow />
   </div>
 </template>
@@ -20,7 +19,12 @@ export default {
 <style scoped>
 .home {
   min-height: 100vh;
-  background-color: #b8c6db;
-  background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 </style>
