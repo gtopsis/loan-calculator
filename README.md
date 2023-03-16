@@ -2,6 +2,7 @@
 
 A simple calculator of the monthly payment for a loan. The formula is `monthly payment = loan amount / duration of repayment`.
 
+[View Demo](https://gtopsis.github.io/loan-calculator/)
 
 ![Screenshot of loan calculator](./screenshots/loan-calc-2.png?raw=true "Screenshot of loan calculator")
 
