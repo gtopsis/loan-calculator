@@ -33,6 +33,11 @@
             <!-- sliders/ranges -->
             <main class="row mb-3">
               <div class="col-12 mb-4">
+                <strong>Ποσό δανείου: </strong>
+                <span>{{ initialLoan }} {{ currency }}</span>
+              </div>
+
+              <div class="col-12 mb-4">
                 <custom-range
                   :min="sliderA.min"
                   :max="sliderA.max"
@@ -124,7 +129,7 @@
                 <div v-if="errors.length">
                   <ul class="mb-0 p-0 text-start">
                     <li v-for="(error, index) in errors" :key="index">
-                      <span class="error-msg ">{{ error }}</span>
+                      <span class="error-msg">{{ error }}</span>
                     </li>
                   </ul>
                 </div>
@@ -162,8 +167,9 @@ export default {
       modalSubtitle: "Επίλεξε την προκαταβολή και την διαρκεια που σε συμφέρει",
       monthlyInstallmentLabel: "Μηνιαία Δόση:",
       dialog: null,
-      finalPrice: 20000,
+      initialLoan: 20000,
       downPayment: 200,
+      currency: "€",
       duration: 12,
       sliderA: {
         min: 0,
@@ -174,7 +180,7 @@ export default {
         measurementUnit: "€",
       },
       sliderB: {
-        min: 0,
+        min: 1,
         max: 72,
         step: 1,
         initValue: 72,
@@ -198,8 +204,9 @@ export default {
   },
   computed: {
     monthlyInstallment() {
-      let final = (this.finalPrice - this.downPayment) / this.duration;
-      return Math.ceil(final);
+      return this.duration
+        ? Math.ceil((this.initialLoan - this.downPayment) / this.duration)
+        : 0;
     },
     formattedSubmitBtnText() {
       return this.submitBtnText.toUpperCase();
