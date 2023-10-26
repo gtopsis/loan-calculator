@@ -9,7 +9,7 @@
 import LoanCalcModal from "@/components/LoanCalcModal.vue";
 
 export default {
-  name: "Home",
+  name: "CarDetails",
   components: {
     LoanCalcModal,
   },
