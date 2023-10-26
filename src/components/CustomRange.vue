@@ -100,9 +100,6 @@ export default {
 .modal-footer {
   border: none;
 }
-.form-label {
-  vertical-align: middle;
-}
 
 .range-container__label {
   font-size: 0.9rem;
@@ -117,13 +114,15 @@ export default {
 .range-container__value .range-value__secondary {
   font-size: 1rem;
 }
+
 .range-container__min-value,
 .range-container__max-value {
   font-size: 0.7rem;
   color: grey;
 }
 
-.slider:hover {
+input[type="range"]::-webkit-slider-thumb,
+input[type="range"]::-moz-range-thumb {
   cursor: pointer;
 }
 </style>
