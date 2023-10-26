@@ -253,10 +253,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.modal {
+  min-height: 600px;
+}
 .modal-header,
 .modal-footer {
   border: none;
 }
+
+.modal-body {
+  min-height: 300px;
+}
+
 .modal-footer {
   background-color: #223657;
 }
